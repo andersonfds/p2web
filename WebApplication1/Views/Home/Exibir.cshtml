@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Lista de Cadastros";
+
+    var curriculos = ViewBag.Curriculos;
+    var hasCurriculo = curriculos.Count > 0;
+}
+
+
+<div class="container">
+
+    @if (!hasCurriculo)
+    {
+        <h1>Não tem curriculos cadastrados</h1>
+    }
+
+    @foreach (var curriculo in curriculos)
+    {
+        <div class="curriculo-card">
+            <h1>@curriculo.nome</h1>
+            <div>@curriculo.endereco</div>
+            <div>@curriculo.cidade</div>
+            <div>@curriculo.estado</div>
+            <div>@curriculo.ocupacao</div>
+            <div>@curriculo.cargo</div>
+            <div>@curriculo.resumo</div>
+            <div class="my-2">
+                <a href="/home/deletar/@curriculo.id"><button class="btn btn-danger">Apagar</button></a>
+            </div>
+        </div>
+    }
+</div>

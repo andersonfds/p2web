@@ -1,31 +1,63 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Cadastre-se agora";
+    var estados = ViewBag.Estados;
+    var cargos = ViewBag.Cargos;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="container">
+    <h1>Trabalhe Conosco</h1>
+    <form action="/home/salvar" method="post" autocomplete="off">
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" class="form-control" placeholder="Joao Da Silva" />
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input type="text" name="endereco" class="form-control" placeholder="Rua dos Alferneiros,7" />
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" name="cidade" class="form-control" placeholder="Jurucê" />
+            </div>
+            <div class="form-group">
+                <label for="estado" class="form-label">Estado</label>
+                <select id="datalistOptions" class="form-control">
+                    <option>Selecione um Estado</option>
+                    @foreach (var estado in estados)
+                {
+                    <option value=@estado>@estado</option>
+                }
+                </select>
+            </div>
+        </fieldset>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+        <fieldset>
+            <legend>Dados Profissionais</legend>
+            <div class="form-group">
+                <label for="ocupacao">Ocupação atual:</label>
+                <input type="text" name="ocupacao" class="form-control" placeholder="Analista" />
+            </div>
+            <div class="form-group">
+                <label>Cargo Pretendido</label><br />
+
+                @foreach (var cargo in cargos)
+                {
+                    var id = "cargo-" + cargos.IndexOf(cargo);
+
+                    <input id=@id type="radio" name="cargoPretendido" value="@cargo">
+                    <label style="font-weight: normal" for=@id >@cargo</label> <br />
+                }
+              
+            </div>
+            <div class="form-group">
+                <label for="resumo">Mini Currículo</label>
+                <textarea class="form-control"></textarea>
+             </div>
+        </fieldset>
+
+        <button class="btn btn-primary">Salvar</button>
+        <button class="btn btn-danger" type="reset">Resetar</button>
+    </form>
 </div>
